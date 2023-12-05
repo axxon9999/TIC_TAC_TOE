@@ -1,17 +1,21 @@
+import random
+
 player1 = ''
 player2 = ''
 players = [player1, player2]
 
-#-------------------RESET BOARD------------------
+# -------------------RESET BOARD------------------
 
-def reset_board(board):
+
+def reset_board():
     board = ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
     return board
 
-#--------------------INTRO---------------------------
+# --------------------INTRO---------------------------
 
-def intro(players):
-    print('\n' *100)
+
+def intro():
+    print('\n' * 100)
     print('-----------------------')
     print('Welcome to Tic Tac Toe!')
     print('-----------------------')
@@ -27,7 +31,8 @@ def intro(players):
     players[1] = input('Player 2, what is your first name? ')
     return players
 
-#-----DISPLAY BOARD ------------------------------------
+# -----DISPLAY BOARD ------------------------------------
+
 
 def display_board(board):
     print("\n" * 100)
@@ -39,7 +44,8 @@ def display_board(board):
     print(f"{board[1]} | {board[2]} | {board[3]}")
     print("")
 
-#-----PLAYER INPUT ---------------------------------------
+# -----PLAYER INPUT ---------------------------------------
+
 
 def player_input(first_player):
     marker_choice = ''
@@ -49,13 +55,15 @@ def player_input(first_player):
 
     return marker_choice
 
-#--------PLACE MARKER----------------------------
+# --------PLACE MARKER----------------------------
+
 
 def place_marker(board, marker, position):
     board[position] = marker
     display_board(board)
 
-#---------CHECK FOR A WIN-------------------------------------
+# ---------CHECK FOR A WIN-------------------------------------
+
 
 def win_check(board, mark):
     win = False
@@ -77,12 +85,11 @@ def win_check(board, mark):
         win = True
     return win
 
-#---------------WHO PLAY FIRST---------------------------------
+# ---------------WHO PLAY FIRST---------------------------------
 
-import random
 
-def choose_first(players):
-    num = random.randint(1,2)
+def choose_first():
+    num = random.randint(1, 2)
     if num == 1:
         print(f'{players[0]} plays first!')
         return players[0]
@@ -90,17 +97,20 @@ def choose_first(players):
         print(f'{players[1]} plays first!')
         return players[1]
 
-#--------------LOOK FOR FREE SPACE ON THE BOARD--------------------------------
+# --------------LOOK FOR FREE SPACE ON THE BOARD--------------------------------
+
 
 def space_check(board, position):
     return board[position] == ' '
 
-#----------------LOOK FOR A FULL BOARD -----------------------------------------
+# ----------------LOOK FOR A FULL BOARD -----------------------------------------
+
 
 def full_board_check(board):
     return ' ' not in board
 
-#----------------------PLAYER CHOOSE A LOCATION--------------------
+# ----------------------PLAYER CHOOSE A LOCATION--------------------
+
 
 def player_choice(board, first_player):
     position = 0
@@ -111,12 +121,13 @@ def player_choice(board, first_player):
         position = int(position)
         if position < 1 or position > 9:
             position = 0
-        elif space_check(board, position) == True:
+        elif space_check(board, position):
             return position
         else:
             position = 0
 
-#-------------------- PLAY AGAIN ? -----------------------------
+# -------------------- PLAY AGAIN ? -----------------------------
+
 
 def replay():
     play_again = 0
@@ -128,7 +139,8 @@ def replay():
             print('Goodbye!')
             exit()
 
-#---------------------ARE YOU READY?--------------------------
+# ---------------------ARE YOU READY?--------------------------
+
 
 def are_you_ready():
     play_again = ''
@@ -140,7 +152,8 @@ def are_you_ready():
             print('Goodbye!')
             exit()
 
-#------------------PLAY THE GAME------------------------------
+# ------------------PLAY THE GAME------------------------------
+
 
 def play_game(first_player, marker_choice, board):
     x = True
@@ -161,7 +174,8 @@ def play_game(first_player, marker_choice, board):
         first_player = switch_player(first_player)
         marker_choice = switch_marker(marker_choice)
 
-#---------------------SWITCH PLAYER AND MARKER---------------------------
+# ---------------------SWITCH PLAYER AND MARKER---------------------------
+
 
 def switch_player(first_player):
     if first_player == players[0]:
@@ -171,6 +185,7 @@ def switch_player(first_player):
 
     return first_player
 
+
 def switch_marker(marker_choice):
     if marker_choice == 'X':
         marker_choice = 'O'
@@ -178,17 +193,19 @@ def switch_marker(marker_choice):
         marker_choice = 'X'
     return marker_choice
 
-#---------------------GAME ENGINE------------------------------
+# ---------------------GAME ENGINE------------------------------
+
 
 def start():
     while True:
         board = ['#', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ']
-        intro(players)
-        first_player = choose_first(players)
+        intro()
+        first_player = choose_first()
         marker_choice = player_input(first_player)
         are_you_ready()
         play_game(first_player, marker_choice, board)
 
-#-------------------------------------------------------------
+# -------------------------------------------------------------
+
 
 start()
